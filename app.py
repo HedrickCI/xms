@@ -21,14 +21,14 @@ except FileNotFoundError:
 st.sidebar.header("Filter Timetable")
 
 # 1. Get unique values for each column and add an "All" option at the beginning
-days = ["All"] + list(df['Day'].unique())
+days = ["All"] + list(df['Date'].unique())
 subjects = ["All"] + list(df['Subject'].unique())
 classes = ["All"] + list(df['Class'].unique())
 teachers = ["All"] + list(df['Teacher'].unique())
 
 # 2. Create the dropdown menus in the sidebar
 
-selected_day = st.sidebar.selectbox("By Day", days)
+selected_day = st.sidebar.selectbox("By Date", days)
 selected_subject = st.sidebar.selectbox("By Subject", subjects)
 selected_class = st.sidebar.selectbox("By Class", classes)
 selected_teacher = st.sidebar.selectbox("By Teacher", teachers)
@@ -39,7 +39,7 @@ filtered_df = df.copy()
 
 # Apply filters one by one if the user selected something other than "All"
 if selected_day != "All":
-    filtered_df = filtered_df[filtered_df['Day'] == selected_day]
+    filtered_df = filtered_df[filtered_df['Date'] == selected_day]
     
 if selected_subject != "All":
     filtered_df = filtered_df[filtered_df['Subject'] == selected_subject]
@@ -56,3 +56,4 @@ st.write(f"Showing {len(filtered_df)} exams:")
 
 # Display the final filtered table
 st.dataframe(filtered_df, use_container_width=True)
+
